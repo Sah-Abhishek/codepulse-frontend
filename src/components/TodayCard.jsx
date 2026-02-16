@@ -6,13 +6,13 @@ export default function TodayCard({ data }) {
   const { stats, total_seconds, total_readable, date } = data;
 
   return (
-    <div className="rounded-2xl bg-zinc-900 border border-zinc-800 p-6">
-      <div className="flex items-center justify-between mb-6">
+    <div className="rounded-2xl bg-zinc-900 border border-zinc-800 p-5 sm:p-6">
+      <div className="flex items-center justify-between mb-5 sm:mb-6">
         <div>
           <p className="text-xs font-mono uppercase tracking-widest text-zinc-500">
             Today
           </p>
-          <p className="text-4xl font-bold text-white mt-1 tracking-tight">
+          <p className="text-3xl sm:text-4xl font-bold text-white mt-1 tracking-tight">
             {total_readable || "0s"}
           </p>
         </div>

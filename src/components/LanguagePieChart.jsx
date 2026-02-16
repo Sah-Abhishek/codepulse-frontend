@@ -36,13 +36,13 @@ export default function LanguagePieChart({ data }) {
     }));
 
   return (
-    <div className="rounded-2xl bg-zinc-900 border border-zinc-800 p-6">
+    <div className="rounded-2xl bg-zinc-900 border border-zinc-800 p-5 sm:p-6">
       <p className="text-xs font-mono uppercase tracking-widest text-zinc-500 mb-4">
         Languages
       </p>
 
-      <div className="flex items-center gap-6">
-        <div className="w-44 h-44 flex-shrink-0">
+      <div className="flex flex-col sm:flex-row items-center gap-5 sm:gap-6">
+        <div className="w-36 h-36 sm:w-44 sm:h-44 flex-shrink-0">
           <ResponsiveContainer width="100%" height="100%">
             <PieChart>
               <Pie
@@ -51,8 +51,8 @@ export default function LanguagePieChart({ data }) {
                 nameKey="language"
                 cx="50%"
                 cy="50%"
-                innerRadius={45}
-                outerRadius={70}
+                innerRadius={40}
+                outerRadius={62}
                 paddingAngle={2}
                 strokeWidth={0}
               >
@@ -68,7 +68,7 @@ export default function LanguagePieChart({ data }) {
           </ResponsiveContainer>
         </div>
 
-        <div className="flex-1 space-y-2.5 overflow-hidden">
+        <div className="flex-1 w-full space-y-2.5 overflow-hidden">
           {chartData.slice(0, 6).map((s) => (
             <div key={s.language} className="flex items-center justify-between">
               <div className="flex items-center gap-2.5 min-w-0">

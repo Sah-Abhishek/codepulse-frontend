@@ -7,16 +7,16 @@ export default function WeeklyCard({ data }) {
   const isDown = changeNum < 0;
 
   return (
-    <div className="rounded-2xl bg-zinc-900 border border-zinc-800 p-6">
+    <div className="rounded-2xl bg-zinc-900 border border-zinc-800 p-5 sm:p-6">
       <p className="text-xs font-mono uppercase tracking-widest text-zinc-500 mb-4">
         Weekly Comparison
       </p>
 
-      <div className="grid grid-cols-2 gap-6">
+      <div className="grid grid-cols-2 gap-4 sm:gap-6">
         {/* This week */}
         <div>
           <p className="text-xs text-zinc-500 mb-1">This week</p>
-          <p className="text-2xl font-bold text-white">
+          <p className="text-xl sm:text-2xl font-bold text-white">
             {this_week.total_readable || "0s"}
           </p>
         </div>
@@ -24,7 +24,7 @@ export default function WeeklyCard({ data }) {
         {/* Last week */}
         <div>
           <p className="text-xs text-zinc-500 mb-1">Last week</p>
-          <p className="text-2xl font-bold text-zinc-500">
+          <p className="text-xl sm:text-2xl font-bold text-zinc-500">
             {last_week.total_readable || "0s"}
           </p>
         </div>

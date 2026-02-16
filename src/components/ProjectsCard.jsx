@@ -7,7 +7,7 @@ export default function ProjectsCard({ data }) {
 
   if (!projects?.length) {
     return (
-      <div className="rounded-2xl bg-zinc-900 border border-zinc-800 p-6">
+      <div className="rounded-2xl bg-zinc-900 border border-zinc-800 p-5 sm:p-6">
         <p className="text-xs font-mono uppercase tracking-widest text-zinc-500 mb-4">
           Projects
         </p>
@@ -19,7 +19,7 @@ export default function ProjectsCard({ data }) {
   const maxSeconds = projects[0]?.total_seconds || 1;
 
   return (
-    <div className="rounded-2xl bg-zinc-900 border border-zinc-800 p-6">
+    <div className="rounded-2xl bg-zinc-900 border border-zinc-800 p-5 sm:p-6">
       <p className="text-xs font-mono uppercase tracking-widest text-zinc-500 mb-5">
         Projects
       </p>

@@ -28,34 +28,39 @@ export default function Dashboard() {
     <div className="min-h-screen bg-zinc-950 text-white">
       {/* Header */}
       <header className="border-b border-zinc-800/50">
-        <div className="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-lg bg-emerald-500/10 flex items-center justify-center">
-              <svg
-                className="w-4 h-4 text-emerald-400"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={2.5}
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M13 10V3L4 14h7v7l9-11h-7z"
-                />
-              </svg>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 sm:py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-0">
+          <div className="flex items-center justify-between w-full sm:w-auto">
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-8 rounded-lg bg-emerald-500/10 flex items-center justify-center">
+                <svg
+                  className="w-4 h-4 text-emerald-400"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2.5}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M13 10V3L4 14h7v7l9-11h-7z"
+                  />
+                </svg>
+              </div>
+              <h1 className="text-lg font-semibold tracking-tight">CodePulse</h1>
             </div>
-            <h1 className="text-lg font-semibold tracking-tight">CodePulse</h1>
+            <div className="sm:hidden">
+              <StatusBadge />
+            </div>
           </div>
 
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-4 sm:gap-6 w-full sm:w-auto">
             {/* Range selector */}
-            <div className="flex items-center bg-zinc-900 rounded-lg border border-zinc-800 p-0.5">
+            <div className="flex items-center bg-zinc-900 rounded-lg border border-zinc-800 p-0.5 flex-1 sm:flex-none">
               {RANGE_OPTIONS.map((d) => (
                 <button
                   key={d}
                   onClick={() => setDays(d)}
-                  className={`px-3 py-1.5 text-xs font-mono rounded-md transition-colors ${days === d
+                  className={`flex-1 sm:flex-none px-3 py-1.5 text-xs font-mono rounded-md transition-colors ${days === d
                     ? "bg-zinc-800 text-white"
                     : "text-zinc-500 hover:text-zinc-300"
                     }`}
@@ -64,13 +69,15 @@ export default function Dashboard() {
                 </button>
               ))}
             </div>
-            <StatusBadge />
+            <div className="hidden sm:block">
+              <StatusBadge />
+            </div>
           </div>
         </div>
       </header>
 
       {/* Content */}
-      <main className="max-w-7xl mx-auto px-6 py-8">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
         {loading ? (
           <Loader />
         ) : today.error ? (

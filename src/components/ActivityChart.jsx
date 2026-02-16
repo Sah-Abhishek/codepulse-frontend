@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import {
   BarChart,
   Bar,
@@ -8,6 +9,18 @@ import {
   CartesianGrid,
 } from "recharts";
 import { formatDate, formatDuration } from "../lib/utils";
+
+function useIsMobile(breakpoint = 640) {
+  const [isMobile, setIsMobile] = useState(
+    typeof window !== "undefined" ? window.innerWidth < breakpoint : false
+  );
+  useEffect(() => {
+    const onResize = () => setIsMobile(window.innerWidth < breakpoint);
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, [breakpoint]);
+  return isMobile;
+}
 
 function CustomTooltip({ active, payload, label }) {
   if (!active || !payload?.length) return null;
@@ -23,13 +36,15 @@ function CustomTooltip({ active, payload, label }) {
 }
 
 export default function ActivityChart({ data }) {
+  const isMobile = useIsMobile();
+
   if (!data?.data?.length) {
     return (
-      <div className="rounded-2xl bg-zinc-900 border border-zinc-800 p-6">
+      <div className="rounded-2xl bg-zinc-900 border border-zinc-800 p-4 sm:p-6">
         <p className="text-xs font-mono uppercase tracking-widest text-zinc-500 mb-4">
           Daily Activity
         </p>
-        <div className="h-64 flex items-center justify-center">
+        <div className="h-48 sm:h-64 flex items-center justify-center">
           <p className="text-sm text-zinc-600">No activity data yet</p>
         </div>
       </div>
@@ -45,15 +60,15 @@ export default function ActivityChart({ data }) {
     }));
 
   return (
-    <div className="rounded-2xl bg-zinc-900 border border-zinc-800 p-6">
-      <div className="flex items-center justify-between mb-6">
+    <div className="rounded-2xl bg-zinc-900 border border-zinc-800 p-4 sm:p-6">
+      <div className="flex items-center justify-between mb-4 sm:mb-6">
         <p className="text-xs font-mono uppercase tracking-widest text-zinc-500">
           Daily Activity
         </p>
         <p className="text-xs text-zinc-600">{data.days} days</p>
       </div>
 
-      <ResponsiveContainer width="100%" height={280}>
+      <ResponsiveContainer width="100%" height={isMobile ? 200 : 280}>
         <BarChart data={chartData} barCategoryGap="20%">
           <CartesianGrid
             strokeDasharray="3 3"
@@ -62,18 +77,20 @@ export default function ActivityChart({ data }) {
           />
           <XAxis
             dataKey="date"
-            tick={{ fill: "#52525b", fontSize: 11 }}
+            tick={{ fill: "#52525b", fontSize: isMobile ? 10 : 11 }}
             axisLine={false}
             tickLine={false}
-            interval="preserveStartEnd"
+            interval={isMobile ? "equidistantPreserveStart" : "preserveStartEnd"}
           />
-          <YAxis
-            tick={{ fill: "#52525b", fontSize: 11 }}
-            axisLine={false}
-            tickLine={false}
-            width={50}
-            tickFormatter={(v) => formatDuration(v)}
-          />
+          {!isMobile && (
+            <YAxis
+              tick={{ fill: "#52525b", fontSize: 11 }}
+              axisLine={false}
+              tickLine={false}
+              width={50}
+              tickFormatter={(v) => formatDuration(v)}
+            />
+          )}
           <Tooltip
             content={<CustomTooltip />}
             cursor={{ fill: "rgba(255,255,255,0.03)" }}

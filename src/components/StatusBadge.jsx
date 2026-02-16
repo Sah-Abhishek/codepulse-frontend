@@ -16,7 +16,7 @@ export default function StatusBadge() {
               : "bg-yellow-500"
           }`}
       />
-      <span className="text-xs font-mono text-zinc-500">
+      <span className="text-xs font-mono text-zinc-500 hidden sm:inline">
         {error ? "Offline" : isHealthy ? "Connected" : "Checking..."}
       </span>
     </div>
